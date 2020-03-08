@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  database:
+    image: 'mongo'
+    container_name: challenge-db
+    environment:
+      - MONGO_INITDB_DATABASE=testapp
+    ports:
+      - "17017-17019:27017-27019"
+  nodejs:
+    build: .
+    container_name: challenge-app
+    env_file: .env
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://database:27017/testapp
+      - API_AUTH_TOKEN=5CD4ED173E1C95FE763B753A297D5
+      - WAIT_HOSTS=database:27017
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/app/
+    links:
+      - database
+    depends_on:
+      - database
+    command: sh -c "/wait && npm run devStart"
