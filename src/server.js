@@ -1,15 +1,9 @@
 const config = require("./config/vars");
 const app = require("./config/express");
 const mongoose = require("./config/mongoose");
-const auth = require("./middlewares/auth");
 
 // Routes
 const routes = require("./routes");
-
-app.use(auth);
-
-// mount api v1 routes
-app.use("/", routes);
 
 // open mongoose connection
 mongoose.connect();

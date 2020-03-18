@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon ./src/server.js",
-    "test": "export NODE_ENV test && jest --testTimeout=10000 --detectOpenHandles"
+    "test": "export NODE_ENV test && jest --testTimeout=10000 --detectOpenHandles",
+    "docs": "run-s build:docs dev",
+    "build:docs": "apidoc -i src/ -o doc/"
   },
   "author": "",
   "license": "ISC",
@@ -20,7 +22,9 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "apidoc": "^0.20.1",
     "jest": "^25.1.0",
+    "npm-run-all": "^4.1.5",
     "supertest": "^4.0.2"
   },
   "jest": {

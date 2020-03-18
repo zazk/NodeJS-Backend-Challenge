@@ -5,6 +5,7 @@ const config = require("../config/vars");
 
 // Routes
 const routes = require("../routes");
+const auth = require("../middlewares/auth");
 
 /**
  * Express instance
@@ -19,7 +20,10 @@ app.use(helmet());
 
 app.use(express.json());
 
+// mount
+app.use("/docs", express.static("doc"));
+
 // mount api v1 routes
-app.use("/", routes);
+app.use("/", auth, routes);
 
 module.exports = app;
